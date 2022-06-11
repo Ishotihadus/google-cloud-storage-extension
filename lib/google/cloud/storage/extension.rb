@@ -8,6 +8,10 @@ module Google
   module Cloud
     module Storage
       class Bucket
+        # downloads the specified file and passes the path of the temporary file to the block argument
+        # @param [String] filename
+        # @yield [path]
+        # @yieldparam path [String] path of tempfile
         def f(filename, mode: 0)
           file = self.file(filename)
           raise 'file not found' unless file
