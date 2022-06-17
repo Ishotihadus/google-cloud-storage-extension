@@ -18,7 +18,10 @@ module Google
             file = self.file(filename)
           rescue StandardError
             tries += 1
-            retry if tries <= 5
+            if tries <= 10
+              sleep 0.1
+              retry
+            end
 
             raise
           end
@@ -34,7 +37,10 @@ module Google
             file.download(tempfile.path)
           rescue StandardError
             tries += 1
-            retry if tries <= 5
+            if tries <= 10
+              sleep 0.1
+              retry
+            end
 
             ::File.delete(tempfile.path)
             raise
